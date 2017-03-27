@@ -10,6 +10,19 @@ Until now this repository has implementations of:
 * A Fast Self-tuning Background Subtraction Algorithm [2]
 * Background Subtraction using Local SVD Binary Pattern [3]
 
+### Mixture of Gaussian from OpenCV
+Frame
+
+![MOG](https://raw.githubusercontent.com/VladX/bgs/master/demos/mog-frame.png)
+
+Ground-truth mask
+
+![MOG](https://raw.githubusercontent.com/VladX/bgs/master/demos/mog-gt.png)
+
+Output
+
+![MOG](https://raw.githubusercontent.com/VladX/bgs/master/demos/mog-mask.png)
+
 ### ViBe: A powerful random technique to estimate the background in video sequences (2009)
 Frame
 
