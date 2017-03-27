@@ -10,7 +10,7 @@ Until now this repository has implementations of:
 * A Fast Self-tuning Background Subtraction Algorithm [2]
 * Background Subtraction using Local SVD Binary Pattern [3]
 
-### Mixture of Gaussian from OpenCV
+### Test frame
 Frame
 
 ![MOG](https://raw.githubusercontent.com/VladX/bgs/master/demos/mog-frame.png)
@@ -19,47 +19,16 @@ Ground-truth mask
 
 ![MOG](https://raw.githubusercontent.com/VladX/bgs/master/demos/mog-gt.png)
 
-Output
-
+### Mixture of Gaussian from OpenCV
 ![MOG](https://raw.githubusercontent.com/VladX/bgs/master/demos/mog-mask.png)
 
 ### ViBe: A powerful random technique to estimate the background in video sequences (2009)
-Frame
-
-![VIBE](https://raw.githubusercontent.com/VladX/bgs/master/demos/vibe-frame.png)
-
-Ground-truth mask
-
-![VIBE](https://raw.githubusercontent.com/VladX/bgs/master/demos/vibe-gt.png)
-
-Output
-
 ![VIBE](https://raw.githubusercontent.com/VladX/bgs/master/demos/vibe-mask.png)
 
 ### A Fast Self-tuning Background Subtraction Algorithm (2014)
-Frame
-
-![FST](https://raw.githubusercontent.com/VladX/bgs/master/demos/fst-frame.png)
-
-Ground-truth mask
-
-![FST](https://raw.githubusercontent.com/VladX/bgs/master/demos/fst-gt.png)
-
-Output
-
 ![FST](https://raw.githubusercontent.com/VladX/bgs/master/demos/fst-mask.png)
 
 ### Background Subtraction using Local SVD Binary Pattern (2016)
-Frame
-
-![SVD](https://raw.githubusercontent.com/VladX/bgs/master/demos/svd-frame.png)
-
-Ground-truth mask
-
-![SVD](https://raw.githubusercontent.com/VladX/bgs/master/demos/svd-gt.png)
-
-Output
-
 ![SVD](https://raw.githubusercontent.com/VladX/bgs/master/demos/svd-mask.png)
 
 ### References
