@@ -31,6 +31,9 @@ Ground-truth mask
 ### Background Subtraction using Local SVD Binary Pattern (2016)
 ![SVD](https://raw.githubusercontent.com/VladX/bgs/master/demos/svd-mask.png)
 
+### Background Subtraction using Local SVD Binary Pattern + MRF postprocessing
+![SVD](https://raw.githubusercontent.com/VladX/bgs/master/demos/svd-mrf.png)
+
 ### References
 
 1. Barnich, Olivier; Van Droogenbroeck, Marc (2009). "ViBe: A powerful random technique to estimate the background in video sequences": 945–948. doi:10.1109/ICASSP.2009.4959741

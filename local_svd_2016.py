@@ -4,6 +4,7 @@ import argparse
 import os
 import time
 import random
+import maxflow
 
 argparser = argparse.ArgumentParser(description='Draft implementation of the VIBE background subtraction algorithm.')
 
@@ -86,21 +87,53 @@ def SVD_step(frame, HR=4, threshold=2, Rscale=5, Rlr=0.1, Tlr=0.02):
 					samples_lsbp[k,i0,j0] = lsbp[i,j]
 	return mask
 
+def postprocessing(im, unary):
+	unary = np.float32(unary)
+	unary = cv2.GaussianBlur(unary, (9, 9), 0)
+
+	g = maxflow.Graph[float]()
+	nodes = g.add_grid_nodes(unary.shape)
+
+	for i in xrange(im.shape[0]):
+		for j in xrange(im.shape[1]):
+			v = nodes[i,j]
+			g.add_tedge(v, -unary[i,j], -1.0+unary[i,j])
+
+	def potts_add_edge(i0, j0, i1, j1):
+		v0, v1 = nodes[i0,j0], nodes[i1,j1]
+		w = 0.1 * np.exp(-((im[i0,j0] - im[i1,j1])**2).sum() / 0.1)
+		g.add_edge(v0, v1, w, w)
+
+	for i in xrange(1,im.shape[0]-1):
+		for j in xrange(1,im.shape[1]-1):
+			potts_add_edge(i, j, i, j-1)
+			potts_add_edge(i, j, i, j+1)
+			potts_add_edge(i, j, i-1, j)
+			potts_add_edge(i, j, i+1, j)
+
+	g.maxflow()
+	seg = np.float32(g.get_grid_segments(nodes))
+	return seg
+
 if args.output is not None:
 	for i in xrange(f.shape[0]):
 		sec = time.time()
 		out = SVD_step(f[i])
+		mrf = postprocessing(f[i], out)
 		print('Frame %d, %.3f sec.' % (i, time.time() - sec))
 		if i >= args.output:
 			cv2.imwrite('svd-frame.png', f[i] * 255)
 			cv2.imwrite('svd-mask.png', out * 255)
 			cv2.imwrite('svd-gt.png', gt[i] * 255)
+			cv2.imwrite('svd-mrf.png', mrf * 255)
 			break
 else:
 	for i in xrange(f.shape[0]):
 		cv2.imshow('Frame', f[i])
 		cv2.imshow('Ground-truth', gt[i])
-		cv2.imshow('Output', SVD_step(f[i]))
+		out = SVD_step(f[i])
+		cv2.imshow('Output', out)
+		cv2.imshow('Output + MRF', postprocessing(f[i], out))
 		k = cv2.waitKey(0)
 		if k == 27:
 			break
